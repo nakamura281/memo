@@ -42,7 +42,7 @@ if($_GET["order"] === "desc") {
 <td><?php echo $row["title"]  ; ?></td>
 <td><?php echo $row["content"] ; ?></td>
 <td><?php echo $row["created_at"] ; ?></td>
-<td><a href="edit.php">編集</a></td>
+<td><?php echo "<a href=edit.php?id=" . $row["id"] . ">編集</a>"; ?></td>
 <td><?php echo "<a href=delete.php?id=" . $row["id"] . ">削除</a>"; ?></td>
 </tr>
 <?php endforeach; ?>
