@@ -10,20 +10,20 @@ $statement->execute();
 $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 foreach($contacts as $value) {
-    $array[] = $value['created_at'];
+  $array[] = $value['created_at'];
 }
-if($_GET["order"] === "desc"){
-    array_multisort($array , SORT_DESC , $contacts);
-}elseif($_GET["order"] === "asc"){
-    array_multisort($array , SORT_ASC , $contacts);
+if($_GET["order"] === "desc") {
+  array_multisort($array , SORT_DESC , $contacts);
+}elseif($_GET["order"] === "asc") {
+  array_multisort($array , SORT_ASC , $contacts);
 }
 
 ?>
 <!Doctype html>
 <meta charset="utf-8">
 <form action="" method="POST">
-    <input type="text" name=“textbox” placeholder="search...">
-    <input type="submit" name="search" value="検索">
+  <input type="text" name=“textbox” placeholder="search...">
+  <input type="submit" name="search" value="検索">
 </form>
 <h3>メモ一覧</h3>
 <a href="create.php">メモ追加</a><br>
