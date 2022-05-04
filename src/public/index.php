@@ -9,12 +9,12 @@ $statement = $pdo->prepare($sql);
 $statement->execute();
 $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-foreach($contacts as $value) {
+foreach ($contacts as $value) {
   $array[] = $value['created_at'];
 }
-if($_GET["order"] === "desc") {
+if ($_GET["order"] === "desc") {
   array_multisort($array , SORT_DESC , $contacts);
-}elseif($_GET["order"] === "asc") {
+} elseif ($_GET["order"] === "asc") {
   array_multisort($array , SORT_ASC , $contacts);
 }
 
