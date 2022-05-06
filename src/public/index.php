@@ -1,13 +1,21 @@
 <?php 
 $contacts = [];
+$search_word = $_POST["word"];
 $dbUserName = "root";
 $dbPassword = "password";
 $pdo = new PDO("mysql:host=mysql; dbname=memo; charset=utf8", $dbUserName, $dbPassword);
 
-$sql = "SELECT * FROM pages";
-$statement = $pdo->prepare($sql);
-$statement->execute();
-$contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
+if ($search_word == "") {
+ $sql = "SELECT * FROM pages";
+ $statement = $pdo->prepare($sql);
+ $statement->execute();
+ $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
+} else {
+  $sql = "SELECT * FROM pages WHERE content LIKE '%" . $search_word . "%' OR title LIKE '%" . $search_word . "%'";
+  $statement = $pdo->prepare($sql);
+  $statement->execute();
+  $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
+}
 
 foreach ($contacts as $value) {
   $array[] = $value['created_at'];
@@ -18,11 +26,12 @@ if ($_GET["order"] === "desc") {
   array_multisort($array , SORT_ASC , $contacts);
 }
 
+
 ?>
 <!Doctype html>
 <meta charset="utf-8">
-<form action="" method="POST">
-  <input type="text" name=“textbox” placeholder="search...">
+<form action="index.php" method="post">
+  <input type="text" name="word" placeholder="search...">
   <input type="submit" name="search" value="検索">
 </form>
 <h3>メモ一覧</h3>
