@@ -9,11 +9,11 @@ $pdo = new PDO("mysql:host=mysql; dbname=memo; charset=utf8", $dbUserName, $dbPa
 $sql = "UPDATE pages SET title = :title , content = :content , updated_at = now() WHERE id = :id";
 
 $statement = $pdo->prepare($sql);
-$statement->bindParam( ':id' , $id , PDO::PARAM_INT);
-$statement->bindParam( ':title' , $title1 , PDO::PARAM_STR);
-$statement->bindParam( ':content' , $content1 , PDO::PARAM_STR);
+$statement->bindValue( ':id' , $id , PDO::PARAM_INT);
+$statement->bindValue( ':title' , $title1 , PDO::PARAM_STR);
+$statement->bindValue( ':content' , $content1 , PDO::PARAM_STR);
 $statement->execute();
+
+header('Location: ./index.php');
+exit();
 ?>
-<!DOCTYPE html>
-<a href="index.php">トップページへ</a> 
-</html>
