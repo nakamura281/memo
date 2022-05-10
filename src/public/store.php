@@ -3,6 +3,11 @@
 $title = $_REQUEST['title'];
 $content = $_REQUEST['content'];
 
+if (empty($title) && empty($content)) {
+  header('Location: ./edit.php');
+  exit();
+}
+
 $dbUserName = "root";
 $dbPassword = "password";
 $pdo = new PDO("mysql:host=mysql; dbname=memo; charset=utf8", $dbUserName, $dbPassword);
@@ -14,16 +19,12 @@ $sql = "INSERT INTO pages (
 )";
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindParam(":title" , $title , PDO:: PARAM_STR);
-$stmt->bindParam(":content" , $content , PDO:: PARAM_STR);
+$stmt->bindValue(":title" , $title , PDO:: PARAM_STR);
+$stmt->bindValue(":content" , $content , PDO:: PARAM_STR);
 $stmt->execute();
 
-$sql1 = "SELECT * FROM pages";
-$statement = $pdo->prepare($sql1);
-$statement->execute();
-$contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-var_dump($contacts);
+header('Location: ./index.php');
+exit();
 ?>
 <!DOCTYPE html>
 <a href="index.php">トップページへ</a> 
