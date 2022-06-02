@@ -1,7 +1,8 @@
 <?php
-include __DIR__ . ('/function.php');
+include __DIR__ . ('/sqlDelete.php');
+include __DIR__ . ('/redirect.php');
 $id = $_GET["id"];
-$obj = new sql_connect(); 
+$obj = new delete(); 
 $sql = "DELETE FROM pages WHERE id = :id";
 $stmt = $obj->delete($sql , $id);
 

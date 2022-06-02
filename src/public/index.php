@@ -1,8 +1,8 @@
 <?php 
 $contacts = [];
 $search_word = $_POST["word"];
-include __DIR__ . ('/function.php');
-$obj = new sql_connect();
+include __DIR__ . ('/sqlSelect.php');
+$obj = new select();
 
 if ($search_word == "") {
   $sql = "SELECT * FROM pages";
