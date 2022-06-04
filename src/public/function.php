@@ -1,5 +1,5 @@
 <?php
-class sqlConnect 
+class SqlConnect 
 {
   //定数の宣言
   const DBUSERNAME = "root";

@@ -1,10 +1,10 @@
 <?php
 include  __DIR__ . ('/function.php');
-class insert
+class Insert
 {
   function insert($sql , $title , $content)
   {
-    $obj = new sqlConnect();
+    $obj = new SqlConnect();
     $hoge = $obj->pdo();
     $stmt = $hoge->prepare($sql);
     $stmt->bindParam(":title" , $title , PDO:: PARAM_STR);

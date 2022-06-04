@@ -1,10 +1,10 @@
 <?php
 include  __DIR__ . ('/function.php');
-class select
+class Select
 {
   function select($sql)
   {
-    $obj = new sqlConnect();
+    $obj = new SqlConnect();
     $hoge = $obj->pdo();
     $stmt = $hoge->prepare($sql);
     $stmt->execute(); 

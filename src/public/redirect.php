@@ -1,5 +1,5 @@
 <?php
-class action
+class Action
 {
   //リダイレクト
   function redirect(string $redirectPath): void
