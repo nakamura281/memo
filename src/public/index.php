@@ -1,20 +1,15 @@
 <?php 
 $contacts = [];
 $search_word = $_POST["word"];
-$dbUserName = "root";
-$dbPassword = "password";
-$pdo = new PDO("mysql:host=mysql; dbname=memo; charset=utf8", $dbUserName, $dbPassword);
+include __DIR__ . ('/SqlSelect.php');
+$obj = new Select();
 
 if ($search_word == "") {
- $sql = "SELECT * FROM pages";
- $statement = $pdo->prepare($sql);
- $statement->execute();
- $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
+  $sql = "SELECT * FROM pages";
+  $contacts = $obj->select($sql);
 } else {
   $sql = "SELECT * FROM pages WHERE content LIKE '%" . $search_word . "%' OR title LIKE '%" . $search_word . "%'";
-  $statement = $pdo->prepare($sql);
-  $statement->execute();
-  $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
+  $contacts = $obj->select($sql);
 }
 
 foreach ($contacts as $value) {

@@ -1,15 +1,11 @@
 <?php
-
+include __DIR__ . ('/sqlDelete.php');
+include __DIR__ . ('/redirect.php');
 $id = $_GET["id"];
-$dbUserName = "root";
-$dbPassword = "password";
-$pdo = new PDO("mysql:host=mysql; dbname=memo; charset=utf8", $dbUserName, $dbPassword);  
-  
+$obj = new Delete(); 
 $sql = "DELETE FROM pages WHERE id = :id";
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(':id', $id);
-$stmt->execute();
+$stmt = $obj->delete($sql , $id);
 
-header('Location: ./index.php');
-exit();
+$request = new Action;
+$action = $request->redirect('index.php');
 ?>

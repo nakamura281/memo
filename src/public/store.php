@@ -1,31 +1,22 @@
 <?php
-
-$title = $_REQUEST['title'];
-$content = $_REQUEST['content'];
+include __DIR__ . ('/sqlInsert.php');
+include __DIR__ . ('/redirect.php');
+$title = filter_input(INPUT_POST, "title");;
+$content = filter_input(INPUT_POST, "content");;
 
 if (empty($title) && empty($content)) {
-  header('Location: ./edit.php');
-  exit();
+  $request = new Action;
+  $action = $request->redirect('edit.php');
 }
 
-$dbUserName = "root";
-$dbPassword = "password";
-$pdo = new PDO("mysql:host=mysql; dbname=memo; charset=utf8", $dbUserName, $dbPassword);
-
+$obj = new Insert();
 $sql = "INSERT INTO pages (
   title , content , created_at , updated_at	
   ) VALUES (
   :title , :content , now() , now()
 )";
+$stmt = $obj->insert($sql , $title , $content);
 
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(":title" , $title , PDO:: PARAM_STR);
-$stmt->bindValue(":content" , $content , PDO:: PARAM_STR);
-$stmt->execute();
-
-header('Location: ./index.php');
-exit();
+$request = new Action;
+$action = $request->redirect('index.php');
 ?>
-<!DOCTYPE html>
-<a href="index.php">トップページへ</a> 
-</html>
